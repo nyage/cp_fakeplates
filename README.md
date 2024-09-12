@@ -24,3 +24,6 @@ To use this script, you need the following:
 2. Add the following line to your `server.cfg`:
    ```bash
    start cp_fakeplates
+
+3. Give your feedback on DISCORD!
+    **https://discord.gg/SvbGD9dkKJ**
