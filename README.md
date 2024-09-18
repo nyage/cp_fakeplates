@@ -27,3 +27,6 @@ To use this script, you need the following:
 
 3. Give your feedback on DISCORD!
     **https://discord.gg/SvbGD9dkKJ**
+
+4. CFX.RE
+   [cp_fakeplates](https://forum.cfx.re/t/cp-fakeplates-scripts-for-blank-plates-with-npc/5268018)
