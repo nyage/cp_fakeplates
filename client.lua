@@ -29,7 +29,7 @@ function spawnNpc(coords)
         {
             name = 'chooseVehicle',
             icon = 'fa-solid fa-car',
-            label = 'Wybierz pojazd w pobliżu',
+            label = 'Select a vehicle nearby',
             onSelect = function()
                 openVehicleMenu()
             end,
@@ -70,7 +70,7 @@ function openVehicleMenu()
     ESX.UI.Menu.CloseAll()
 
     ESX.UI.Menu.Open('default', GetCurrentResourceName(), 'vehicle_menu', {
-        title = 'Wybierz pojazd',
+        title = 'Select a vehicle',
         align = 'top-left',
         elements = elements
     }, function(data, menu)
@@ -79,7 +79,7 @@ function openVehicleMenu()
 
         if selectedVehicle then
             if GetVehicleNumberOfPassengers(selectedVehicle) > 0 or not IsVehicleSeatFree(selectedVehicle, -1) then
-                ESX.ShowNotification('Ktoś jest w pojeździe')
+                ESX.ShowNotification('There is someone in the vehicle')
             else
                 npcApproachVehicle(selectedVehicle)
             end
@@ -115,7 +115,7 @@ end
 -- Hides vehicle plate and sets cooldown
 function hidePlate()
     if cooldown > GetGameTimer() then
-        ESX.ShowNotification('Poczekaj chwilę przed ponownym wykonaniem tej akcji')
+        ESX.ShowNotification('Wait a moment before performing this action again')
         return
     end
 
@@ -123,24 +123,24 @@ function hidePlate()
     if vehicle and DoesEntityExist(vehicle) then
         local originalPlate = GetVehicleNumberPlateText(vehicle)
         SetVehicleNumberPlateText(vehicle, ' ')
-        TriggerEvent('esx:showNotification', 'Tablice rejestracyjne ukryte na 10 minut')
+        TriggerEvent('esx:showNotification', 'License plates hidden for 10 minutes')
 
         Citizen.SetTimeout(Config.HideDuration / 2, function()
-            TriggerEvent('esx:showNotification', 'Za 5 minut zasłona tablicy SPADNIE')
+            TriggerEvent('esx:showNotification', 'In 5 minute the numberplate cover will FALL OFF')
         end)
 
         Citizen.SetTimeout(Config.HideDuration - 60000, function()
-            TriggerEvent('esx:showNotification', 'Za 1 minutę zasłona tablicy SPADNIE')
+            TriggerEvent('esx:showNotification', 'In 1 minute the number plate cover will FALL OFF')
         end)
 
         Citizen.SetTimeout(Config.HideDuration, function()
             SetVehicleNumberPlateText(vehicle, originalPlate)
-            TriggerEvent('esx:showNotification', 'Zasłona tablicy została zdjęta')
+            TriggerEvent('esx:showNotification', 'The number plate cover has been removed')
         end)
 
         cooldown = GetGameTimer() + Config.CooldownTime
     else
-        TriggerEvent('esx:showNotification', 'Brak wybranego pojazdu')
+        TriggerEvent('esx:showNotification', 'No vehicle selected')
     end
 end
 
@@ -152,7 +152,7 @@ ox_target:addSphereZone({
         {
             name = 'hidePlate',
             icon = 'fa-solid fa-car',
-            label = 'Zasłoń tablice',
+            label = '',
             onSelect = function()
                 hidePlate()
             end
